@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_mainconfig.MainConfig</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>MainConfig</name>
+        <script><![CDATA[var MainConfig = Class.create();
+MainConfig.prototype = {
+    initialize: function() {
+    },
+addHoursToDateTime: function(duration){
+
+		var timee = new GlideDateTime();
+		var gdt = new GlideDateTime();
+		timee.setValue(gdt);
+
+		var gd = new GlideDate();
+		var gdtsplit = gdt.getDisplayValue().split(' ');
+		var gdtsplittime = timee.getValue().split(' ');
+		gd.setValue(gdtsplit[0]);
+
+		var firstDT  = gd.getByFormat("yyyy-MM-dd")+' '+gdtsplittime[1];
+	var addTYPE = "hour";
+		//var addTYPE = this.getParameter('sysparm_addtype'); //What to add - second (addSeconds()), minute (need to add conversion), hour (need to add conversion), day (addDays()), week (addWeeks()), month (addMonths()), year (addYears())
+		var addTIME = duration; //How much time to add
+		var day = GlideDateTime(firstDT);
+	gs.info("addTIME before"+addTIME);
+		gs.info("day before"+day);
+
+		if(addTYPE == 'second'){day.addSeconds(addTIME);}
+else if (addTYPE == 'minute'){day.addSeconds(addTIME*60);}
+	else if (addTYPE == 'hour'){day.addSeconds(addTIME*(60*60));}
+		else if (addTYPE == 'day'){day.addDays(addTIME);}
+			else if (addTYPE == 'week'){day.addWeeks(addTIME);}
+				else if (addTYPE == 'month'){day.addMonths(addTIME);}
+					else if (addTYPE == 'year'){day.addYears(addTIME);}
+						else {day.addDays(addTIME);}
+gs.info("day after"+day);
+							//return day.getDisplayValue();
+	return day;
+						},
+
+    type: 'MainConfig'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-18 20:39:45</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>4cf644a31320c380b10d3d7ed144b06a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>MainConfig</sys_name>
+        <sys_package display_value="MainConfig" source="x_snc_mainconfig">92154c231320c380b10d3d7ed144b05e</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MainConfig">92154c231320c380b10d3d7ed144b05e</sys_scope>
+        <sys_update_name>sys_script_include_4cf644a31320c380b10d3d7ed144b06a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-18 20:39:45</sys_updated_on>
+    </sys_script_include>
+</record_update>
